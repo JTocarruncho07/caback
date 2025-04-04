@@ -26,8 +26,11 @@ const obtenerMantenimientosPorActivo = catchError(async (req, res) => {
 const actualizarMantenimiento = catchError(async (req, res) => {
     try {
       const { id } = req.params;
+      const [actualizado] = await Mantenimiento.update(req.body, { where: { id } });
 
+      if (!actualizado) return res.status(404).json({ error: "Mantenimiento no encontrado" });
 
+      res.json({ mensaje: "Mantenimiento actualizado correctamente" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -35,8 +38,11 @@ const actualizarMantenimiento = catchError(async (req, res) => {
 const eliminarMantenimiento = catchError(async (req, res) => {
     try {
       const { id } = req.params;
+      const eliminado = await Mantenimiento.destroy({ where: { id } });
 
+      if (!eliminado) return res.status(404).json({ error: "ActMantenimiento no encontrado" });
 
+      res.json({ mensaje: "Mantenimiento eliminado correctamente" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
