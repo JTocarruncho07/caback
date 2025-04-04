@@ -26,11 +26,8 @@ const obtenerMantenimientosPorActivo = catchError(async (req, res) => {
 const actualizarMantenimiento = catchError(async (req, res) => {
     try {
       const { id } = req.params;
-      const [actualizado] = await Activo.update(req.body, { where: { id } });
 
-      if (!actualizado) return res.status(404).json({ error: "Activo no encontrado" });
 
-      res.json({ mensaje: "Activo actualizado correctamente" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -38,11 +35,8 @@ const actualizarMantenimiento = catchError(async (req, res) => {
 const eliminarMantenimiento = catchError(async (req, res) => {
     try {
       const { id } = req.params;
-      const eliminado = await Activo.destroy({ where: { id } });
 
-      if (!eliminado) return res.status(404).json({ error: "Activo no encontrado" });
 
-      res.json({ mensaje: "Activo eliminado correctamente" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
