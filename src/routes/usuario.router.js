@@ -1,18 +1,19 @@
 const express = require('express');
 const {getAll, getOne, remove, update, registrar, login} = require('../controllers/usuario.controller');
+const authMiddleware = require('../middleware/authMiddleware');
 
 const UsuarioRouter = express.Router();
 
 UsuarioRouter.route('/usuarios')
-    .get(getAll)
-    .post(registrar)
+    .get(authMiddleware, getAll)
+    .post(authMiddleware, registrar)
 
 UsuarioRouter.route('/usuarios/login')
-   .post(login)
+   .post(authMiddleware,login)
 
 UsuarioRouter.route('/usuarios/:id')
-   .get(getOne)
-   .delete(remove)
-   .put(update)
+   .get(authMiddleware, getOne)
+   .delete(authMiddleware, remove)
+   .put(authMiddleware, update)
 
 module.exports = UsuarioRouter;
