@@ -1,6 +1,7 @@
 const MantenimientoRouter = require('../routes/matenimiento.router');
 const Mantenimiento = require('../models/Mantenimiento');
 const catchError = require('../utils/catchError');
+
 const crearMantenimiento = catchError(async (req, res) => {
     try {
       const mantenimiento = await Mantenimiento.create(req.body);
