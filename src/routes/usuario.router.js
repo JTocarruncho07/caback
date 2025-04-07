@@ -9,7 +9,7 @@ UsuarioRouter.route('/usuarios')
     .post(authMiddleware, registrar)
 
 UsuarioRouter.route('/usuarios/login')
-   .post(authMiddleware,login)
+   .post(login)
 
 UsuarioRouter.route('/usuarios/:id')
    .get(authMiddleware, getOne)
